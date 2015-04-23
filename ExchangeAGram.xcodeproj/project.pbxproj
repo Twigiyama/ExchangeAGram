@@ -15,6 +15,7 @@
 		A9625C431AE79CEB008C40A7 /* ExchangeAGramTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9625C421AE79CEB008C40A7 /* ExchangeAGramTests.swift */; };
 		A9625C4D1AE7B8C5008C40A7 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9625C4C1AE7B8C5008C40A7 /* FeedViewController.swift */; };
 		A9625C4F1AE9008C008C40A7 /* FeedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9625C4E1AE9008C008C40A7 /* FeedCell.swift */; };
+		A9625C511AE905F1008C40A7 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9625C501AE905F1008C40A7 /* MobileCoreServices.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +41,7 @@
 		A9625C421AE79CEB008C40A7 /* ExchangeAGramTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeAGramTests.swift; sourceTree = "<group>"; };
 		A9625C4C1AE7B8C5008C40A7 /* FeedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
 		A9625C4E1AE9008C008C40A7 /* FeedCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedCell.swift; sourceTree = "<group>"; };
+		A9625C501AE905F1008C40A7 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -47,6 +49,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A9625C511AE905F1008C40A7 /* MobileCoreServices.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -96,6 +99,7 @@
 		A9625C271AE79CEB008C40A7 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				A9625C501AE905F1008C40A7 /* MobileCoreServices.framework */,
 				A9625C281AE79CEB008C40A7 /* Info.plist */,
 			);
 			name = "Supporting Files";
