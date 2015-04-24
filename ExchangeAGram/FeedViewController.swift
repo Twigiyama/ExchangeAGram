@@ -8,14 +8,23 @@
 
 import UIKit
 import MobileCoreServices
+import CoreData
 
 class FeedViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
     @IBOutlet weak var collectionView: UICollectionView!
+    
+    var feedArray: [AnyObject] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        
+        let request = NSFetchRequest(entityName: "FeedItem")
+        let appDelegate: AppDelegate = (UIApplication.sharedApplication().delegate as AppDelegate)
+        let context: NSManagedObjectContext = appDelegate.managedObjectContext!
+        feedArray = context.executeFetchRequest(request, error: nil)!
     }
 
     override func didReceiveMemoryWarning() {
@@ -71,6 +80,26 @@ class FeedViewController: UIViewController, UICollectionViewDataSource, UICollec
             self.presentViewController(alerView, animated: true, completion: nil)
         }
     }
+    
+    //UIImagePickerControllerDelegate
+    
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]) {
+        let image = info[UIImagePickerControllerOriginalImage] as UIImage
+        let imageData = UIImageJPEGRepresentation(image, 1.0)
+        
+        let managedObjectContext = (UIApplication.sharedApplication().delegate as AppDelegate).managedObjectContext
+        let entityDescription = NSEntityDescription.entityForName("FeedItem", inManagedObjectContext: managedObjectContext!)
+        let cell = FeedItem(entity: entityDescription!, insertIntoManagedObjectContext: managedObjectContext!)
+        
+        
+        cell.image = imageData
+        cell.caption = "test caption"
+        
+        (UIApplication.sharedApplication().delegate as AppDelegate).saveContext()
+        
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
     
     
     // UICollectionViewDataSource
