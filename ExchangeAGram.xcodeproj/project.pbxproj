@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A93F82C01AEBDD07003EC368 /* FilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A93F82BF1AEBDD07003EC368 /* FilterViewController.swift */; };
 		A9625C2A1AE79CEB008C40A7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9625C291AE79CEB008C40A7 /* AppDelegate.swift */; };
 		A9625C2D1AE79CEB008C40A7 /* ExchangeAGram.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A9625C2B1AE79CEB008C40A7 /* ExchangeAGram.xcdatamodeld */; };
 		A9625C321AE79CEB008C40A7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A9625C301AE79CEB008C40A7 /* Main.storyboard */; };
@@ -17,6 +18,7 @@
 		A9625C4F1AE9008C008C40A7 /* FeedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9625C4E1AE9008C008C40A7 /* FeedCell.swift */; };
 		A9625C511AE905F1008C40A7 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9625C501AE905F1008C40A7 /* MobileCoreServices.framework */; };
 		A9625C531AE9100D008C40A7 /* FeedItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9625C521AE9100D008C40A7 /* FeedItem.swift */; };
+		A9E7B8821AEBF6DA002B042A /* FilterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9E7B8811AEBF6DA002B042A /* FilterCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -30,6 +32,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		A93F82BF1AEBDD07003EC368 /* FilterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterViewController.swift; sourceTree = "<group>"; };
 		A9625C241AE79CEB008C40A7 /* ExchangeAGram.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ExchangeAGram.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A9625C281AE79CEB008C40A7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A9625C291AE79CEB008C40A7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -44,6 +47,7 @@
 		A9625C4E1AE9008C008C40A7 /* FeedCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedCell.swift; sourceTree = "<group>"; };
 		A9625C501AE905F1008C40A7 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		A9625C521AE9100D008C40A7 /* FeedItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedItem.swift; sourceTree = "<group>"; };
+		A9E7B8811AEBF6DA002B042A /* FilterCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,6 +94,8 @@
 				A9625C4C1AE7B8C5008C40A7 /* FeedViewController.swift */,
 				A9625C4E1AE9008C008C40A7 /* FeedCell.swift */,
 				A9625C301AE79CEB008C40A7 /* Main.storyboard */,
+				A93F82BF1AEBDD07003EC368 /* FilterViewController.swift */,
+				A9E7B8811AEBF6DA002B042A /* FilterCell.swift */,
 				A9625C331AE79CEB008C40A7 /* Images.xcassets */,
 				A9625C351AE79CEB008C40A7 /* LaunchScreen.xib */,
 				A9625C2B1AE79CEB008C40A7 /* ExchangeAGram.xcdatamodeld */,
@@ -225,6 +231,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A9E7B8821AEBF6DA002B042A /* FilterCell.swift in Sources */,
+				A93F82C01AEBDD07003EC368 /* FilterViewController.swift in Sources */,
 				A9625C2A1AE79CEB008C40A7 /* AppDelegate.swift in Sources */,
 				A9625C4F1AE9008C008C40A7 /* FeedCell.swift in Sources */,
 				A9625C4D1AE7B8C5008C40A7 /* FeedViewController.swift in Sources */,
@@ -423,6 +431,7 @@
 				A9625C481AE79CEB008C40A7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		A9625C491AE79CEB008C40A7 /* Build configuration list for PBXNativeTarget "ExchangeAGramTests" */ = {
 			isa = XCConfigurationList;
@@ -431,6 +440,7 @@
 				A9625C4B1AE79CEB008C40A7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
