@@ -11,6 +11,7 @@ import UIKit
 class FilterViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
     
     var thisFeedItem: FeedItem!
+    var thisFeedID: Int = -1
     
     var collectionView: UICollectionView!
     
@@ -19,6 +20,10 @@ class FilterViewController: UIViewController, UICollectionViewDataSource, UIColl
     var context: CIContext = CIContext(options: nil)
     
     var filters:[CIFilter] = []
+    
+    let placeHolderImage = UIImage(named: "PlaceHolder")
+    
+    let tmp = NSTemporaryDirectory()
     
     
 
@@ -30,7 +35,7 @@ class FilterViewController: UIViewController, UICollectionViewDataSource, UIColl
         
         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
         layout.sectionInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
-        layout.itemSize = CGSize(width: 100.0, height: 100.0)
+        layout.itemSize = CGSize(width: 150.0, height: 150.0)
         collectionView = UICollectionView(frame: self.view.frame, collectionViewLayout: layout)
         collectionView.dataSource = self
         collectionView.delegate = self
@@ -57,21 +62,36 @@ class FilterViewController: UIViewController, UICollectionViewDataSource, UIColl
         
         let cell: FilterCell = collectionView.dequeueReusableCellWithReuseIdentifier("MyCell", forIndexPath: indexPath) as FilterCell
         
-        cell.imageView.image = UIImage(named: "Placeholder")
-        
-        let filterQueue: dispatch_queue_t = dispatch_queue_create("filter queue", nil)
-        dispatch_async(filterQueue, { () -> Void in
-            let filterImage = self.filteredImageFromImage(self.thisFeedItem.image, filter: self.filters[indexPath.row])
+  
+            cell.imageView.image = placeHolderImage
             
-            dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                cell.imageView.image = filterImage
+            let filterQueue: dispatch_queue_t = dispatch_queue_create("filter queue", nil)
+            dispatch_async(filterQueue, { () -> Void in
+                let filterImage = self.getCachedImage(self.thisFeedID, imageNumber: indexPath.row)
+                
+                dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                    cell.imageView.image = filterImage
+                })
+                
             })
-            
-        })
         
         
     
         return cell
+    }
+    
+    //UICollectionViewDelegate
+    
+    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        let filterImage = self.filteredImageFromImage(self.thisFeedItem.image, filter: self.filters[indexPath.row])
+        let imageData = UIImageJPEGRepresentation(filterImage, 1.0)
+        self.thisFeedItem.image = imageData
+        let thumbData = UIImageJPEGRepresentation(filterImage, 0.1)
+        self.thisFeedItem.thumbNail = thumbData
+        (UIApplication.sharedApplication().delegate as AppDelegate).saveContext()
+        
+        self.navigationController?.popToRootViewControllerAnimated(true)
+        
     }
     
     // Helper function
@@ -123,5 +143,37 @@ class FilterViewController: UIViewController, UICollectionViewDataSource, UIColl
         return finalImage!
         
     }
+    
+    //cache functions
+    
+    func cacheImage(cacheImageID: Int, imageNumber: Int) {
+        let fileName = "id \(cacheImageID) number \(imageNumber)"
+        let uniquePath = tmp.stringByAppendingPathComponent(fileName)
+        if !NSFileManager.defaultManager().fileExistsAtPath(uniquePath) {
+            let data = self.thisFeedItem.thumbNail
+            let filter = filters[imageNumber]
+            let image = filteredImageFromImage(data, filter: filter)
+            UIImageJPEGRepresentation(image, 1.0).writeToFile(uniquePath, atomically: true)
+        }
+    }
+    
+    func getCachedImage(getImageID: Int, imageNumber: Int) -> UIImage {
+        
+        let fileName = "id \(getImageID) number \(imageNumber)"
+        let uniquePath = tmp.stringByAppendingPathComponent(fileName)
+        
+        var image:UIImage
+        
+        if NSFileManager.defaultManager().fileExistsAtPath(uniquePath) {
+            image = UIImage(contentsOfFile: uniquePath)!
+            
+        } else {
+            self.cacheImage(getImageID, imageNumber: imageNumber)
+            image = UIImage(contentsOfFile: uniquePath)!
+        }
+        
+        return image
+    }
+    
 
 }
