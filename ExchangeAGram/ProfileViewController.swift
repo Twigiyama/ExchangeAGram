@@ -27,6 +27,12 @@ class ProfileViewController: UIViewController, FBLoginViewDelegate {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+ 
+    
+    @IBAction func mapViewButtonTapped(sender: UIButton) {
+        
+        performSegueWithIdentifier("mapSegue", sender: nil)
+    }
     
     func loginViewShowingLoggedInUser(loginView: FBLoginView!) {
         
