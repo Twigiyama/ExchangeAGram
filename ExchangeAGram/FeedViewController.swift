@@ -23,6 +23,10 @@ class FeedViewController: UIViewController, UICollectionViewDataSource, UICollec
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let backgroundImage = UIImage(named: "AutumnBackground")
+        self.view.backgroundColor = UIColor(patternImage: backgroundImage!)
+        
 
         // Do any additional setup after loading the view.
         locationManager = CLLocationManager()
@@ -115,12 +119,15 @@ class FeedViewController: UIViewController, UICollectionViewDataSource, UICollec
         let entityDescription = NSEntityDescription.entityForName("FeedItem", inManagedObjectContext: managedObjectContext!)
         let cell = FeedItem(entity: entityDescription!, insertIntoManagedObjectContext: managedObjectContext!)
         
+        let UUID = NSUUID().UUIDString
         
+        cell.uniqueID = UUID
         cell.image = imageData
         cell.caption = "test caption"
         cell.thumbNail = thumbNailData
         cell.latitude = locationManager.location.coordinate.latitude
         cell.longitude = locationManager.location.coordinate.longitude
+        cell.filtered = false
         
         (UIApplication.sharedApplication().delegate as AppDelegate).saveContext()
         
@@ -149,8 +156,14 @@ class FeedViewController: UIViewController, UICollectionViewDataSource, UICollec
         
         let thisItem = feedArray[indexPath.row] as FeedItem
         
+        if thisItem.filtered == true {
+            let returnedImage = UIImage(data: thisItem.image)
+            let image = UIImage(CGImage: returnedImage?.CGImage, scale: 1.0, orientation: UIImageOrientation.Right)
+        }
+        
         cell.captionLabel.text = thisItem.caption
         cell.imageView.image = UIImage(data: thisItem.image)
+    
         
         return cell
     }

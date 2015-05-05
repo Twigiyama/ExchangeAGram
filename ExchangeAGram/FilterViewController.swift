@@ -183,6 +183,7 @@ class FilterViewController: UIViewController, UICollectionViewDataSource, UIColl
         let thumbData = UIImageJPEGRepresentation(filterImage, 0.1)
         self.thisFeedItem.thumbNail = thumbData
         self.thisFeedItem.caption = caption
+        self.thisFeedItem.filtered = true
         (UIApplication.sharedApplication().delegate as AppDelegate).saveContext()
         
         self.navigationController?.popToRootViewControllerAnimated(true)
@@ -226,11 +227,13 @@ class FilterViewController: UIViewController, UICollectionViewDataSource, UIColl
         var image:UIImage
         
         if NSFileManager.defaultManager().fileExistsAtPath(uniquePath) {
-            image = UIImage(contentsOfFile: uniquePath)!
+            var returnedImage = UIImage(contentsOfFile: uniquePath)!
+            image = UIImage(CGImage: returnedImage.CGImage, scale: 1.0, orientation: UIImageOrientation.Right)!
             
         } else {
             self.cacheImage(getImageID, imageNumber: imageNumber)
-            image = UIImage(contentsOfFile: uniquePath)!
+            var returnedImage = UIImage(contentsOfFile: uniquePath)!
+            image = UIImage(CGImage: returnedImage.CGImage, scale:1.0 , orientation: UIImageOrientation.Right)!
         }
         
         return image
